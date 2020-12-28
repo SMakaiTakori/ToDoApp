@@ -16,7 +16,7 @@ const Todo = ({ todo, index }) => {
 
   return (
     <>
-      <li className={isActive ? "todo" : "is-done"} onClick={handleToggle}>
+      <li className={isActive ? "todo" : "todo is-done"} onClick={handleToggle}>
         {todo.item}
       </li>
 
