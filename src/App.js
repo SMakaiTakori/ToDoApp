@@ -8,13 +8,19 @@ const Todo = ({ todo, index }) => {
     setActive(!isActive);
   };
 
+  const css = `
+    .is-done {
+        text-decoration: line-through;
+    }
+`;
+
   return (
     <>
       <li className={isActive ? "todo" : "is-done"} onClick={handleToggle}>
         {todo.item}
       </li>
 
-      <style></style>
+      <style>{css}</style>
     </>
   );
 };
