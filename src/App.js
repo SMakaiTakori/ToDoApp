@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import "./App.css";
 
-const Todo = ({ todo }) => {
+const Todo = ({ todo, count, countDown }) => {
   const [isActive, setActive] = useState("false");
 
   const handleToggle = () => {
     setActive(!isActive);
+    countDown();
   };
 
   const css = `
