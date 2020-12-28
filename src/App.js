@@ -25,7 +25,7 @@ const Todo = ({ todo, count, countDown }) => {
   );
 };
 
-const TodoForm = ({ addTodo, countUp, count }) => {
+const TodoForm = ({ addTodo, countUp, count, todos }) => {
   const [value, setValue] = useState("");
 
   const handleSubmit = (e) => {
@@ -50,7 +50,7 @@ const TodoForm = ({ addTodo, countUp, count }) => {
       <button onClick={handleSubmit}> Add Todo </button>
       <p>
         {" "}
-        {count} out of {count}
+        {count} out of {todos.length}
       </p>
     </>
   );
@@ -76,6 +76,7 @@ const App = () => {
   const addTodo = (item) => {
     const newTodos = [...todos, { item }];
     setTodos(newTodos);
+    console.log(todos.length - 1);
   };
 
   const countUp = () => {
@@ -92,7 +93,12 @@ const App = () => {
         {todos.map((todo, index) => (
           <Todo key={index} todo={todo} count={count} countDown={countDown} />
         ))}
-        <TodoForm addTodo={addTodo} count={count} countUp={countUp} />
+        <TodoForm
+          addTodo={addTodo}
+          todos={todos}
+          count={count}
+          countUp={countUp}
+        />
       </div>
     </div>
   );
