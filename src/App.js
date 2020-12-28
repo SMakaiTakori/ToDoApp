@@ -25,7 +25,7 @@ const Todo = ({ todo, count, countDown }) => {
   );
 };
 
-const TodoForm = ({ addTodo, countUp, count, todos }) => {
+const TodoForm = ({ countUp, addTodo, count, todos }) => {
   const [value, setValue] = useState("");
 
   const handleSubmit = (e) => {
@@ -50,14 +50,13 @@ const TodoForm = ({ addTodo, countUp, count, todos }) => {
       <button onClick={handleSubmit}> Add Todo </button>
       <p>
         {" "}
-        {count} out of {todos.length}
+        {count} out of {todos.length} left to complete
       </p>
     </>
   );
 };
 
 const App = () => {
-  const [count, setCount] = useState(0);
   const [todos, setTodos] = useState([
     {
       item: "Write Blog Post ",
@@ -73,18 +72,19 @@ const App = () => {
     },
   ]);
 
+  const [count, setCount] = useState(todos.length);
+
   const addTodo = (item) => {
     const newTodos = [...todos, { item }];
     setTodos(newTodos);
-    console.log(todos.length - 1);
-  };
-
-  const countUp = () => {
-    setCount(count + 1);
   };
 
   const countDown = () => {
     setCount(count - 1);
+  };
+
+  const countUp = () => {
+    setCount(count + 1);
   };
 
   return (
