@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./App.css";
 
-const Todo = ({ todo, index }) => {
+const Todo = ({ todo }) => {
   const [isActive, setActive] = useState("false");
 
   const handleToggle = () => {
@@ -19,13 +19,12 @@ const Todo = ({ todo, index }) => {
       <li className={isActive ? "todo" : "todo is-done"} onClick={handleToggle}>
         {todo.item}
       </li>
-
       <style>{css}</style>
     </>
   );
 };
 
-const TodoForm = ({ addTodo }) => {
+const TodoForm = ({ addTodo, countUp, count }) => {
   const [value, setValue] = useState("");
 
   const handleSubmit = (e) => {
@@ -33,6 +32,7 @@ const TodoForm = ({ addTodo }) => {
     if (!value) return;
     addTodo(value);
     setValue("");
+    countUp();
   };
 
   return (
@@ -47,11 +47,16 @@ const TodoForm = ({ addTodo }) => {
         />
       </form>
       <button onClick={handleSubmit}> Add Todo </button>
+      <p>
+        {" "}
+        {count} out of {count}
+      </p>
     </>
   );
 };
 
 const App = () => {
+  const [count, setCount] = useState(0);
   const [todos, setTodos] = useState([
     {
       item: "Write Blog Post ",
@@ -72,13 +77,21 @@ const App = () => {
     setTodos(newTodos);
   };
 
+  const countUp = () => {
+    setCount(count + 1);
+  };
+
+  const countDown = () => {
+    setCount(count - 1);
+  };
+
   return (
     <div className="app">
       <div className="todo-list">
         {todos.map((todo, index) => (
-          <Todo key={index} index={index} todo={todo} />
+          <Todo key={index} todo={todo} count={count} countDown={countDown} />
         ))}
-        <TodoForm addTodo={addTodo} />
+        <TodoForm addTodo={addTodo} count={count} countUp={countUp} />
       </div>
     </div>
   );
